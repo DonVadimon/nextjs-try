@@ -1,4 +1,6 @@
 import React from 'react';
+import { gql } from '@apollo/client';
+import { Client } from 'apollo-client';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 
@@ -6,9 +8,24 @@ import { Counter } from 'components/Counter/Counter';
 
 import styles from 'styles/Home.module.css';
 
-const IndexPage: NextPage = () => {
+type Country = {
+    code: string;
+    name: string;
+    emoji: string;
+};
+
+interface IResp {
+    countries: Country[];
+}
+
+const IndexPage: NextPage<{ countries: Country[] }> = ({ countries }) => {
     return (
         <div className={styles.container}>
+            <div className="">
+                {countries.map(({ code, emoji, name }) => (
+                    <div key={code}>{`${code} ${emoji} ${name}`}</div>
+                ))}
+            </div>
             <Head>
                 <title>Redux Toolkit</title>
                 <link rel="icon" href="/favicon.ico" />
@@ -51,5 +68,25 @@ const IndexPage: NextPage = () => {
         </div>
     );
 };
+
+export async function getStaticProps() {
+    const { data } = await Client.query<IResp>({
+        query: gql`
+            query Countries {
+                countries {
+                    code
+                    name
+                    emoji
+                }
+            }
+        `,
+    });
+
+    return {
+        props: {
+            countries: data.countries.slice(0, 4),
+        },
+    };
+}
 
 export default IndexPage;
