@@ -1,26 +1,28 @@
-/*
-https://docs.nestjs.com/providers#services
-*/
-
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 import { Product } from 'src/graphql.schema';
 import { CreateProductDto } from './dto/create-product.dto';
+import { ProductDocument, ProductSchemaBase } from './schemas/products.schema';
 
 @Injectable()
 export class ProductsService {
-    private readonly products: Product[] = [{ id: 'firstprod', title: 'My Soul', price: 90000 }];
+    constructor(@InjectModel(ProductSchemaBase.name) private productModel: Model<ProductDocument>) {}
 
-    getAll(): Product[] {
-        return this.products;
+    async getAll(): Promise<Product[]> {
+        return this.productModel.find().exec();
     }
 
-    getById(id: string): Product {
-        return this.products.find(({ id: prodId }) => id === prodId);
+    async getById(id: string): Promise<Product> {
+        return this.productModel.findById(id);
     }
 
-    createProduct(product: CreateProductDto): Product {
-        const createdProduct: Product = { id: Date.now().toString(), ...product };
-        this.products.push(createdProduct);
-        return createdProduct;
+    async create(createProductDto: CreateProductDto): Promise<Product> {
+        const createdProduct = new this.productModel(createProductDto);
+        return createdProduct.save();
+    }
+
+    async remove(id: string): Promise<Product> {
+        return this.productModel.findByIdAndRemove(id);
     }
 }

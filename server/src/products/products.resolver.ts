@@ -25,7 +25,13 @@ export class ProductsResolver {
 
     @Mutation('createProduct')
     async createProduct(@Args('createProductInput') args: CreateProductDto): Promise<Product> {
-        const createdProduct = await this.productsService.createProduct(args);
+        const createdProduct = await this.productsService.create(args);
         return createdProduct;
+    }
+
+    @Mutation('removeProduct')
+    async removeProduct(@Args('id') args: string): Promise<Product> {
+        const removedProduct = await this.productsService.remove(args);
+        return removedProduct;
     }
 }

@@ -3,8 +3,5 @@ import { CreateProductInput } from 'src/graphql.schema';
 
 export class CreateProductDto extends CreateProductInput {
     @Min(0)
-    score: number;
-
-    @Min(0)
     price: number;
 }

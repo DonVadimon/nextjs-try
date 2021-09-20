@@ -15,7 +15,7 @@ export class CreateProductInput {
 }
 
 export class Product {
-    id: string;
+    _id: string;
     title: string;
     price: number;
     score?: Nullable<number>;
@@ -31,6 +31,8 @@ export abstract class IQuery {
 
 export abstract class IMutation {
     abstract createProduct(createProductInput?: Nullable<CreateProductInput>): Nullable<Product> | Promise<Nullable<Product>>;
+
+    abstract removeProduct(id?: Nullable<string>): Nullable<Product> | Promise<Nullable<Product>>;
 }
 
 type Nullable<T> = T | null;
