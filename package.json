@@ -1,0 +1,21 @@
+{
+    "name": "nextjs-try",
+    "version": "1.0.0",
+    "private": true,
+    "workspaces": ["client", "server"],
+    "main": "index.js",
+    "author": "Vadim Khizhnyakov <provcydia@gmail.com>",
+    "license": "MIT",
+    "scripts": {
+        "rmall": "rimraf node_modules && cd server && rimraf node_modules && cd ../client && rimraf node_modules",
+        "lint": "cd server && yarn lint && cd ../client && yarn lint",
+        "lint-fix": "cd server && yarn lint-fix && cd ../client && yarn lint-fix",
+        "prettier": "cd server && yarn prettier && cd ../client && yarn prettier"
+    },
+    "devDependencies": {
+        "eslint": "^7.30.0",
+        "prettier": "^2.3.2",
+        "rimraf": "^3.0.2",
+        "typescript": "^4.3.5"
+    }
+}
