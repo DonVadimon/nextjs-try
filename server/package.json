@@ -20,7 +20,7 @@
         "lint": "eslint \"{src,apps,libs,test}/**/*.+(js|jsx|ts|tsx)\"",
         "lint-fix": "eslint --fix \"{src,apps,libs,test}/**/*.+(js|jsx|ts|tsx)\"",
         "prettier": "prettier --write \"{src,apps,libs,test}/**/*.+(js|jsx|ts|tsx|json)\"",
-        "gen-types": "ts-node generate-typings"
+        "gen-types": "ts-node generate-typings && ts-node generate-typings --client"
     },
     "dependencies": {
         "@nestjs/common": "^8.0.0",

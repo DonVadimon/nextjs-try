@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid teal;
+    border-radius: 12px;
+    color: teal;
+    padding: 24px;
+}
+
+.container:hover {
+    box-shadow: 0 0 12px 12px rgba(71, 139, 139, 0.514);
+}
+
+.title {
+    margin: 0;
+    font-weight: 600;
+}
+
+.price {
+    margin: 0;
+}

@@ -3,14 +3,14 @@
     "version": "0.0.1",
     "private": true,
     "scripts": {
-        "dev": "next",
+        "dev": "next -p 3001",
         "build": "next build",
         "start": "next start",
         "type-check": "tsc",
         "test": "jest",
-        "lint": "eslint \"src/**/*.+(js|jsx|ts|tsx|json)\"",
-        "lint-fix": "eslint --fix \"src/**/*.+(js|jsx|ts|tsx|json)\"",
-        "prettier": "prettier --write \"src/**/*.+(js|jsx|ts|tsx|json)\""
+        "lint": "eslint \"{src,pages}/**/*.+(js|jsx|ts|tsx|json)\"",
+        "lint-fix": "eslint --fix \"{src,pages}/**/*.+(js|jsx|ts|tsx|json)\"",
+        "prettier": "prettier --write \"{src,pages}/**/*.+(js|jsx|ts|tsx|json)\""
     },
     "dependencies": {
         "@apollo/client": "^3.4.13",
